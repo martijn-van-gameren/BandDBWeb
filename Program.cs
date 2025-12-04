@@ -1,4 +1,12 @@
+using BandDBWeb.Data;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
+
+var cs = builder.Configuration.GetConnectionString("Default");
+
+builder.Services.AddDbContext<BandDbContext>(options =>
+    options.UseMySql(cs, ServerVersion.AutoDetect(cs)));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
